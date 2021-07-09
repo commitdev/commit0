@@ -9,6 +9,7 @@ import (
 	"regexp"
 	"strings"
 
+	tm "github.com/buger/goterm"
 	"github.com/commitdev/zero/internal/config/moduleconfig"
 	"github.com/commitdev/zero/internal/constants"
 	"github.com/commitdev/zero/internal/util"
@@ -100,6 +101,19 @@ func ValidateProjectName(input string) error {
 	return nil
 }
 
+const infoBoxHeight = 4
+
+var currentLine int = infoBoxHeight
+
+// showInfoBox prints a box with some text in it, and the title "Info"
+func showInfoBox(infoText string) {
+	box := tm.NewBox(100|tm.PCT, 4, 0)
+	fmt.Fprint(box, infoText)
+	tm.Print(tm.MoveTo(box.String(), 1, 1))
+	tm.MoveCursor(4, 1)
+	tm.Printf("Info")
+}
+
 // RunPrompt obtains the value of PromptHandler depending on the parameter's definition
 // for the project config,  there are multiple ways of obtaining the value
 // values go into params depending on `Condition` as the highest precedence (Whether it gets this value)
@@ -113,9 +127,14 @@ func (p PromptHandler) RunPrompt(projectParams map[string]string, envVarTranslat
 	var result string
 
 	if p.Condition(projectParams) {
-		if p.Parameter.Info != "" {
-			flog.Guidef(p.Parameter.Info)
+
+		// If we start printing below the bottom of the terminal screen, go back to the top
+		if currentLine+infoBoxHeight+1 > tm.Height() {
+			tm.Clear()
+			currentLine = infoBoxHeight
 		}
+		showInfoBox(p.Parameter.Info)
+
 		// TODO: figure out scope of projectParams per project
 		// potentially dangerous to have cross module env leaking
 		// so if community module has an `execute: twitter tweet $ENV`
@@ -127,6 +146,11 @@ func (p PromptHandler) RunPrompt(projectParams map[string]string, envVarTranslat
 		} else if p.Parameter.Value != "" {
 			result = p.Parameter.Value
 		} else {
+			// Move down to the next line to show the prompt
+			currentLine++
+			tm.MoveCursor(1, currentLine)
+			tm.Flush() // Call it every time at the end of rendering
+
 			err, result = promptParameter(p)
 		}
 		if err != nil {

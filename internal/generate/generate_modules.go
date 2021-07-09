@@ -39,7 +39,7 @@ func Generate(projectConfig projectconfig.ZeroProjectConfig, overwriteFiles bool
 		// Load module configuration
 		moduleConfig, err := module.ParseModuleConfig(mod.Files.Source)
 		if err != nil {
-			return fmt.Errorf("unable to load module:  %v", err)
+			return fmt.Errorf("unable to load module (%s):  %v", mod.Files.Source, err)
 		}
 
 		moduleDir := path.Join(module.GetSourceDir(mod.Files.Source), moduleConfig.InputDir)

@@ -89,7 +89,7 @@ func loadAllModules(moduleSources []string) (map[string]moduleconfig.ModuleConfi
 	for _, moduleSource := range moduleSources {
 		mod, err := module.ParseModuleConfig(moduleSource)
 		if err != nil {
-			exit.Fatal("Unable to load module:  %v\n", err)
+			exit.Fatal("Unable to load module (%s):  %v\n", moduleSource, err)
 		}
 		modules[mod.Name] = mod
 		mappedSources[mod.Name] = moduleSource
@@ -104,6 +104,7 @@ func getProjectNamePrompt() PromptHandler {
 		Parameter: moduleconfig.Parameter{
 			Field:   "projectName",
 			Label:   "Project Name",
+			Info:    "This name will be used in most of the resources that are created and should be unique within an AWS account.",
 			Default: "",
 		},
 		Condition: NoCondition,
@@ -117,6 +118,7 @@ func getProjectPrompts(projectName string, modules map[string]moduleconfig.Modul
 			Parameter: moduleconfig.Parameter{
 				Field: "ShouldPushRepositories",
 				Label: "Should the created projects be checked into github automatically?",
+				Info:  "If yes, we will automatically create repositories for you in github and check in the generated code.\nIf no, you will need to do these steps manually after running the zero create command.",
 				Options: yaml.MapSlice{
 					yaml.MapItem{Key: "y", Value: "yes"},
 					yaml.MapItem{Key: "n", Value: "no"},
@@ -129,6 +131,7 @@ func getProjectPrompts(projectName string, modules map[string]moduleconfig.Modul
 			Parameter: moduleconfig.Parameter{
 				Field:   "GithubRootOrg",
 				Label:   "What's the root of the github org to create repositories in?",
+				Info:    "This should be github.com/<your-organization-name>",
 				Default: "github.com/",
 			},
 			Condition: KeyMatchCondition("ShouldPushRepositories", "y"),
@@ -143,6 +146,7 @@ func getProjectPrompts(projectName string, modules map[string]moduleconfig.Modul
 			Parameter: moduleconfig.Parameter{
 				Field:   moduleName,
 				Label:   label,
+				Info:    "This will be used as the name of the repository.",
 				Default: module.OutputDir,
 			},
 			Condition: NoCondition,
@@ -171,8 +175,10 @@ func chooseCloudProvider(projectConfig *projectconfig.ZeroProjectConfig) {
 }
 
 func chooseStack(reg registry.Registry) []string {
+	showInfoBox("A stack is a group of Zero modules. They will be pulled in from the registry and templated to create the different parts of your project such as infrastructure, backend, frontend, etc.")
+
 	providerPrompt := promptui.Select{
-		Label: "Pick a stack you'd like to use",
+		Label: "Pick the stack you'd like to use",
 		Items: registry.AvailableLabels(reg),
 	}
 	_, providerResult, err := providerPrompt.Run()

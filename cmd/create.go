@@ -20,7 +20,7 @@ var (
 )
 
 func init() {
-	createCmd.PersistentFlags().StringVarP(&createConfigPath, "config", "c", constants.ZeroProjectYml, "config path")
+	createCmd.PersistentFlags().StringVarP(&createConfigPath, "config", "c", constants.ZeroProjectYml, "The project.yml file to load. The default is the one in the current directory.")
 	createCmd.PersistentFlags().BoolVarP(&overwriteFiles, "overwrite", "o", false, "overwrite pre-existing files")
 
 	rootCmd.AddCommand(createCmd)
