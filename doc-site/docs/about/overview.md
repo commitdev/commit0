@@ -39,7 +39,7 @@ Security: Properly configured access-control to resources/security groups, using
 
 [Check out some resources for learning more about these technologies.][learning-resources]
 
-### Infrastructure
+### [Infrastructure][docs-infra]
 - Fully configured infrastructure-as-code AWS environment including:
   - VPCs per environment (staging, production) with pre-configured subnets, security groups, etc.
   - EKS Kubernetes cluster per environment, pre-configured with helpful tools like cert-manager, external-dns, nginx-ingress-controller
@@ -51,7 +51,7 @@ Security: Properly configured access-control to resources/security groups, using
 - Tooling to make it easy to set up secure access for your dev team
 - Local/Cloud Hybrid developer environment using Telepresence (Optional)
 
-### Backend
+### [Backend][docs-backend-go] ([Go][docs-backend-go] / [Node.js][docs-backend-nodejs])
 - Golang or Node.js example project automatically set up, Dockerized, and deployed to your new Kubernetes cluster
 - CI pipeline built with [CircleCI][circleci] or GitHub Actions. Just merge a PR and a deploy will start. Your code will be built and tested, deployed to staging, then prompt you to push to production
 - File upload / download support using signed Cloudfront URLs (Optional)
@@ -59,7 +59,7 @@ Security: Properly configured access-control to resources/security groups, using
 - Notification support for sending and receiving messages in your application (web, mobile, SMS, Email, etc.) (Optional) (In Progress)
 - User management integration with Kratos and Oathkeeper - No need to handle login, signup, authentication yourself (Optional)
 
-### Frontend
+### [Frontend][docs-frontend-react]
 - React example project automatically set up, deployed and served securely to your customers
 - CI pipeline built with CircleCI or GitHub Actions. Just merge a PR and a deploy will start. Your code will be built and tested, deployed to staging, then prompt you to push to production
 - File upload / download support using signed Cloudfront URLs (Optional)
@@ -70,6 +70,10 @@ Security: Properly configured access-control to resources/security groups, using
 [real-world-usage]: ./real-world-usage
 [technology-choices]: ./technology-choices
 [learning-resources]: ../reference/learning-resources
+[docs-infra]: /docs/modules/aws-eks-stack/
+[docs-backend-go]: /docs/modules/backend-go/
+[docs-backend-nodejs]: /docs/modules/backend-nodejs/
+[docs-frontend-react]: /docs/modules/frontend-react/
 <!-- links -->
 
 

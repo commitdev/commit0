@@ -15,7 +15,7 @@ env:
   region: us-west-2
   s3_sync_path_to_exclude: docs/modules/*
   s3_sync_path: ""
-  BUILD_DOMAIN: staging.getzero.dev
+  BUILD_DOMAIN: ${{ secrets.ZERO_DOC_SITE_DOMAIN_NAME }}
 jobs:
   build:
     runs-on: ubuntu-latest

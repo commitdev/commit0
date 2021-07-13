@@ -1,7 +1,17 @@
 .features {
   background: white;
-  display: flex;
   align-items: center;
+
+  .title {
+    color: var(--ifm-landing-page-inverse-font-color);
+    font-weight: 400;
+    text-transform: inherit;
+    max-width: 34rem;
+  }
+
+  .row {
+    justify-content: center;
+  }
 
   &>div{
     row-gap: 3rem;

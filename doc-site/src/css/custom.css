@@ -70,7 +70,7 @@ html{
 .menu__list .menu__list-item {
   font-weight: 400;
 }
-.featured-sections h3{
+.featured-sections h3 , .featured-sections h2, .featured-sections h4{
   font-family: 'Montserrat';
   font-weight: 800;
 }
@@ -123,11 +123,15 @@ html{
   padding: 6rem;
 }
 
-.featured-sections h3 {
+.featured-sections h3, .featured-sections h2 {
   text-transform: uppercase;
   letter-spacing: 0.05rem;
   padding: 0;
   margin: 0 auto 3rem auto;
+}
+
+.featured-sections h2 {
+  margin: 0 auto 5rem auto;
 }
 
 /**
@@ -196,4 +200,8 @@ html[data-theme='light'] .header-docs-link:before  {
 
 .docs-main-toc .toc-item {
   margin: 2rem 1rem;
+}
+
+.header-logo-24 span svg {
+  display: none;
 }

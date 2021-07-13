@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import styles from './HomepageOfferings.module.scss';
 
 const offerings = [
@@ -199,7 +199,7 @@ export default function FeaturedOfferings() {
   })
 
   return <div className={`${styles.offerings_container} featured-sections`}>
-    <h3>{title}</h3>
+    <h2>{title}</h2>
     <Offerings data={offerings} active={state.active} clickHandler={setState} />
   </div>
 }

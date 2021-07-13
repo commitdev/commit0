@@ -51,7 +51,7 @@ export default function Home() {
   return (
     <Layout
       title={`Build it Fast, Build it Right!`}
-      description="Take you from idea to production on day one!"
+      description="Opinionated infrastructure to take you from idea to production on day one!"
       >
       <style>{landingPageOnlyGlobalItemStyle}</style>
       <HomepageHeader />
@@ -62,6 +62,7 @@ export default function Home() {
         <HomepageFeatures />
         <HomepageWhyZero />
         <HomepageOfferings />
+        <HomePageCallToAction />
       </main>
     </Layout>
   );

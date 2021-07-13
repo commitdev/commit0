@@ -8,10 +8,11 @@ const FeatureList = [
     Svg: require('../../static/img/icons/attr-reliable.svg').default,
     description: (
       <>
-        Your infrastructure will be set up in multiple availability zones
-        making it highly available and fault tolerant. All infrastructure is
-        represented with code using HashiCorp Terraform so your
-        environments are reproducible, auditable, and easy to configure.
+        Your infrastructure will be highly available and fault tolerant. 
+        Production workloads will be self-healing, with all traffic load 
+        balanced to multiple instances of your application. All the 
+        infrastructure is represented with code to be reproducible, 
+        auditable, and easy to configure.
       </>
     ),
   },
@@ -20,10 +21,9 @@ const FeatureList = [
     Svg: require('../../static/img/icons/attr-scalable.svg').default,
     description: (
       <>
-        Your services will be running in Kubernetes, with the EKS nodes 
-        running in AWS Auto Scaling Group. The application workloads 
-        and cluster size are ready to scale whenever the need arises. 
-        Frontend assets will be served from AWS' Cloudfront CDN.
+        Everything in your system will scale automatically based on the needs 
+        of your application. For frontend assets, using a CDN will ensure global 
+        scale, so you don’t need to worry about it.
       </>
     ),
   },
@@ -32,11 +32,12 @@ const FeatureList = [
     Svg: require('../../static/img/icons/attr-secure.svg').default,
     description: (
       <>
-        Properly configured access-control to resources/security groups. 
-        Our practices are built on top of multiple security audits and 
-        penetration tests. Automatic certificate management using 
-        Let's Encrypt, database encryption, VPN support, and more means 
-        your traffic will always be encrypted. 
+        All your systems will follow security best practices backed up
+        by multiple security audits and penetration tests, and will be 
+        properly configured to make sure access is controlled to 
+        private networks, secrets, and data. Built-in application 
+        features help you bullet-proof your application by using 
+        existing, tested tools rather than reinventing the wheel.
       </>
     ),
   },
@@ -56,7 +57,7 @@ const FeatureList = [
 ];
 
 const Feature = ({Svg, title, description}) => (
-  <div className={clsx('col col--6') + " feature"}>
+  <div className={clsx('col col--5') + " feature"}>
     <div className="text--center">
       <Svg className={styles.featureSvg} alt={title} />
     </div>
@@ -68,13 +69,15 @@ const Feature = ({Svg, title, description}) => (
 )
 
 export default function HomepageFeatures() {
-  return (
+  return (<>
     <section className={`${styles.features} featured-sections`}>
-      <div className="row">
+
+      <h2 className={styles.title}>Building something <strong>fast</strong> doesn't mean you can't also build it <strong>right</strong></h2>
+      <div className={`${styles.row} row`}>
         {FeatureList.map((props, idx) => (
           <Feature key={idx} {...props} />
         ))}
       </div>
     </section>
-  )
+  </>)
 }
